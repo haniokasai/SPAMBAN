@@ -1,0 +1,5 @@
+name: SpamBan
+main: com.haniokasai.nukkit.SPAMBAN
+version: 1.0.0
+api: [1.0.0]
+description: Spam Block Plugin
