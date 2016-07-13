@@ -27,6 +27,9 @@ public class Main extends PluginBase implements Listener{
 		Player player = event.getPlayer();
 		String name   = player.getName();
 		if(lc.containsKey(name)){
+			if(!spam.containsKey(name)){
+				spam.put(name,0);
+			}
 			if(ctime - lc.get(name)<=5){
 				int i = spam.get(name)+1;
 				spam.put(name,i);
@@ -37,8 +40,9 @@ public class Main extends PluginBase implements Listener{
 				String reason = " [SPAMBAN] "+name+" was banned.";
 				String ip = player.getAddress();
 				Server.getInstance().broadcastMessage(" [SPAMBAN] "+name+" was banned."+ip);
-				player.getServer().getIPBans().addBan(ip,"ChatBan", null,reason);//ip-ban
-				player.getServer().getNameBans().addBan(name,"ChatBan", null,reason);//ban
+				Server.getInstance().getIPBans().addBan(ip,"ChatBan", null,reason);//ip-ban
+				Server.getInstance().getNameBans().addBan(name,"ChatBan", null,reason);//ban
+				player.kick(" [SPAMBAN] "+name+" was banned."+ip);
 			}
 		}
 		lc.put(name,ctime);
