@@ -30,7 +30,7 @@ public class Main extends PluginBase implements Listener{
 			if(!spam.containsKey(name)){
 				spam.put(name,0);
 			}
-			if(ctime - lc.get(name)<=5){
+			if(ctime - lc.get(name)<=3){
 				int i = spam.get(name)+1;
 				spam.put(name,i);
 			}else{
