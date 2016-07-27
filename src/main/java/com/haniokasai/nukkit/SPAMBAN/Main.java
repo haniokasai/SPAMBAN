@@ -26,19 +26,20 @@ public class Main extends PluginBase implements Listener{
 	public void onmotion(PlayerChatEvent event){
 		Player player = event.getPlayer();
 		String name   = player.getName();
+		ctime = (int) (System.currentTimeMillis()/1000);
 		if(lc.containsKey(name)){
 			if(!spam.containsKey(name)){
 				spam.put(name,0);
-			}
-			
-			if((ctime - lc.get(name))>5){
+				lc.put(name,ctime);
+			}else if((ctime - lc.get(name))>5){
 				spam.remove(name);
-			}
-			if((ctime - lc.get(name))<=3){
+				lc.put(name,ctime);
+			}else if((ctime - lc.get(name))<=3){
 				int i = spam.get(name)+1;
 				spam.put(name,i);
+				lc.put(name,ctime);
 			}
-			
+			if(spam.containsKey(name)){
 			if(spam.get(name)>15){
 				String reason = " [SPAMBAN] "+name+" was banned.";
 				String ip = player.getAddress();
@@ -47,7 +48,9 @@ public class Main extends PluginBase implements Listener{
 				Server.getInstance().getNameBans().addBan(name,"ChatBan", null,reason);//ban
 				player.kick(" [SPAMBAN] "+name+" was banned."+ip);
 			}
+			}
+		}else{
+			lc.put(name,ctime);
 		}
-		lc.put(name,ctime);
 	}
 }
