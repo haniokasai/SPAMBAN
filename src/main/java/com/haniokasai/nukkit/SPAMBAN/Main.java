@@ -31,11 +31,12 @@ public class Main extends PluginBase implements Listener{
 				spam.put(name,0);
 			}
 			
+			if((ctime - lc.get(name))>5){
+				spam.remove(name);
+			}
 			if((ctime - lc.get(name))<=3){
 				int i = spam.get(name)+1;
 				spam.put(name,i);
-			}else{
-				spam.remove(name);
 			}
 			
 			if(spam.get(name)>15){
