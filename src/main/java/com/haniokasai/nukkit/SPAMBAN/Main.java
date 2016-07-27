@@ -30,12 +30,14 @@ public class Main extends PluginBase implements Listener{
 			if(!spam.containsKey(name)){
 				spam.put(name,0);
 			}
-			if(ctime - lc.get(name)<=3){
+			
+			if((ctime - lc.get(name))<=3){
 				int i = spam.get(name)+1;
 				spam.put(name,i);
 			}else{
-				spam.put(name,0);
+				spam.remove(name);
 			}
+			
 			if(spam.get(name)>15){
 				String reason = " [SPAMBAN] "+name+" was banned.";
 				String ip = player.getAddress();
