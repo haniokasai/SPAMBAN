@@ -45,7 +45,6 @@ public class Main extends PluginBase implements Listener{
 				String ip = player.getAddress();
 				Server.getInstance().broadcastMessage(" [SPAMBAN] "+name+" was banned."+ip);
 				Server.getInstance().getIPBans().addBan(ip,"ChatBan", null,reason);//ip-ban
-				Server.getInstance().getNameBans().addBan(name,"ChatBan", null,reason);//ban
 				player.kick(" [SPAMBAN] "+name+" was banned."+ip);
 			}
 			}
